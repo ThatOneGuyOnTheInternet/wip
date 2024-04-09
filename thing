@@ -1,1 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Monkey Picture</title>
+</head>
+<body>
+    <h1>Random Monkey Picture</h1>
+    <div id="monkey-image"></div>
 
+    <script>
+        fetch('https://api.thecatapi.com/v1/images/search?category_ids=5')
+            .then(response => response.json())
+            .then(data => {
+                const randomIndex = Math.floor(Math.random() * data.length);
+                const randomMonkey = data[randomIndex];
+                const monkeyImg = document.createElement('img');
+                monkeyImg.src = randomMonkey.url;
+                monkeyImg.alt = 'Random Monkey';
+                document.getElementById('monkey-image').appendChild(monkeyImg);
+            })
+            .catch(error => {
+                console.error('Error fetching monkey image:', error);
+            });
+    </script>
+</body>
+</html>
